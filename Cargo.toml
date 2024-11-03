@@ -3,6 +3,9 @@ name = "search-api"
 version = "0.1.0"
 edition = "2021"
 publish = ["crates-io"]
+description = "Search Engine Result scraping"
+license = "MIT"
+authors = ["holmofy"]
 
 [dependencies]
 reqwest = { version = "0.12", features = ["json"] }
