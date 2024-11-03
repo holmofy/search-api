@@ -1,0 +1,14 @@
+[package]
+name = "search-api"
+version = "0.1.0"
+edition = "2021"
+publish = ["crates-io"]
+
+[dependencies]
+reqwest = { version = "0.12", features = ["json"] }
+reqwest-scraper = "0.5"
+thiserror = "1"
+async-trait = "0.1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
