@@ -1,12 +1,8 @@
 use thiserror::Error;
 
-pub use baidu::Baidu;
-pub use bing::Bing;
-pub use sogou::Sogou;
-
-mod baidu;
-mod bing;
-mod sogou;
+pub mod baidu;
+pub mod bing;
+pub mod sogou;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct SearchItem {

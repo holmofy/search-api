@@ -2,17 +2,13 @@ use crate::Result;
 use reqwest_scraper::FromXPath;
 use reqwest_scraper::ScraperResponse;
 
-pub struct Bing;
+pub async fn search(keyword: &str) -> Result<Vec<crate::SearchItem>> {
+    let html = reqwest::get(format!("https://www.bing.com/search?q={keyword}"))
+        .await?
+        .xpath()
+        .await?;
 
-impl Bing {
-    pub async fn search(keyword: &str) -> Result<Vec<crate::SearchItem>> {
-        let html = reqwest::get(format!("https://www.bing.com/search?q={keyword}"))
-            .await?
-            .xpath()
-            .await?;
-
-        Ok(SearchResult::from_xhtml(html).map(|rs| rs.into_iter().map(|r| r.into()).collect())?)
-    }
+    Ok(SearchResult::from_xhtml(html).map(|rs| rs.into_iter().map(|r| r.into()).collect())?)
 }
 
 #[derive(Debug, FromXPath)]
@@ -45,7 +41,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_bing() {
-        let r = Bing::search("搜索引擎").await;
+        let r = search("搜索引擎").await;
         assert_eq!(r.is_ok(), true);
         let r = r.unwrap();
         assert!(r.len() > 0);
