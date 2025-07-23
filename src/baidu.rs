@@ -1,13 +1,12 @@
 use crate::Result;
-use crate::SearchEngine;
 use reqwest::header;
 use reqwest_scraper::FromXPath;
 use reqwest_scraper::ScraperResponse;
 
 pub struct Baidu;
 
-impl SearchEngine for Baidu {
-    async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
+impl Baidu {
+    pub async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let mut headers = header::HeaderMap::new();
         headers.insert("User-Agent", header::HeaderValue::from_static("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"));
         let html = reqwest::Client::builder()

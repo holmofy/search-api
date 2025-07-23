@@ -1,4 +1,3 @@
-use std::future::Future;
 use thiserror::Error;
 
 pub use baidu::Baidu;
@@ -8,10 +7,6 @@ pub use sogou::Sogou;
 mod baidu;
 mod bing;
 mod sogou;
-
-pub trait SearchEngine {
-    fn search(&self, keyword: &str) -> impl Future<Output = Result<Vec<SearchItem>>> + Send;
-}
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct SearchItem {
