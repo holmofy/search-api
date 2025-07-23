@@ -1,6 +1,6 @@
 [package]
 name = "search-api"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 publish = ["crates-io"]
 description = "Search Engine Result scraping"
@@ -12,6 +12,7 @@ reqwest = { version = "0.12", features = ["json"] }
 reqwest-scraper = "0.6"
 thiserror = "2"
 async-trait = "0.1"
+serde = { version = "1", features = ["derive"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }

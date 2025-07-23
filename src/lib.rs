@@ -14,7 +14,7 @@ pub trait SearchEngine {
     async fn search(keyword: &str) -> Result<Vec<SearchItem>>;
 }
 
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct SearchItem {
     pub url: String,
     pub title: String,
