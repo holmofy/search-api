@@ -6,7 +6,7 @@ use reqwest_scraper::ScraperResponse;
 pub struct Sogou;
 
 impl Sogou {
-    pub async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
+    pub async fn search(keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let mut headers = header::HeaderMap::new();
         headers.insert("User-Agent", header::HeaderValue::from_static("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"));
 
@@ -53,8 +53,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_sogou() {
-        let sogou = Sogou;
-        let r = sogou.search("搜索引擎").await;
+        let r = Sogou::search("搜索引擎").await;
         assert_eq!(r.is_ok(), true);
         let r = r.unwrap();
         assert!(r.len() > 0);

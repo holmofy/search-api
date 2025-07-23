@@ -5,7 +5,7 @@ use reqwest_scraper::ScraperResponse;
 pub struct Bing;
 
 impl Bing {
-    pub async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
+    pub async fn search(keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let html = reqwest::get(format!("https://www.bing.com/search?q={keyword}"))
             .await?
             .xpath()
@@ -45,8 +45,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_bing() {
-        let bing = Bing;
-        let r = bing.search("搜索引擎").await;
+        let r = Bing::search("搜索引擎").await;
         assert_eq!(r.is_ok(), true);
         let r = r.unwrap();
         assert!(r.len() > 0);
