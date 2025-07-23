@@ -11,7 +11,7 @@ mod sogou;
 
 #[async_trait]
 pub trait SearchEngine {
-    async fn search(keyword: &str) -> Result<Vec<SearchItem>>;
+    async fn search(&self, keyword: &str) -> Result<Vec<SearchItem>>;
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]

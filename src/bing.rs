@@ -8,7 +8,7 @@ pub struct Bing;
 
 #[async_trait]
 impl SearchEngine for Bing {
-    async fn search(keyword: &str) -> Result<Vec<crate::SearchItem>> {
+    async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let html = reqwest::get(format!("https://www.bing.com/search?q={keyword}"))
             .await?
             .xpath()
@@ -48,7 +48,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_bing() {
-        let r = Bing::search("搜索引擎").await;
+        let bing = Bing;
+        let r = bing.search("搜索引擎").await;
         assert_eq!(r.is_ok(), true);
         let r = r.unwrap();
         assert!(r.len() > 0);

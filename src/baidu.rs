@@ -9,7 +9,7 @@ pub struct Baidu;
 
 #[async_trait]
 impl SearchEngine for Baidu {
-    async fn search(keyword: &str) -> Result<Vec<crate::SearchItem>> {
+    async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let mut headers = header::HeaderMap::new();
         headers.insert("User-Agent", header::HeaderValue::from_static("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"));
         let html = reqwest::Client::builder()
@@ -58,7 +58,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_baidu() {
-        let r = Baidu::search("搜索引擎").await;
+        let baidu = Baidu;
+        let r = baidu.search("搜索引擎").await;
         assert_eq!(r.is_ok(), true);
         let r = r.unwrap();
         assert!(r.len() > 0);
