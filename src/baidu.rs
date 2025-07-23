@@ -1,13 +1,11 @@
 use crate::Result;
 use crate::SearchEngine;
-use async_trait::async_trait;
 use reqwest::header;
 use reqwest_scraper::FromXPath;
 use reqwest_scraper::ScraperResponse;
 
 pub struct Baidu;
 
-#[async_trait]
 impl SearchEngine for Baidu {
     async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let mut headers = header::HeaderMap::new();

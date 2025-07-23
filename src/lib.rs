@@ -1,4 +1,4 @@
-use async_trait::async_trait;
+use std::future::Future;
 use thiserror::Error;
 
 pub use baidu::Baidu;
@@ -9,9 +9,8 @@ mod baidu;
 mod bing;
 mod sogou;
 
-#[async_trait]
 pub trait SearchEngine {
-    async fn search(&self, keyword: &str) -> Result<Vec<SearchItem>>;
+    fn search(&self, keyword: &str) -> impl Future<Output = Result<Vec<SearchItem>>> + Send;
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]

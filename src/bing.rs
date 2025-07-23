@@ -1,12 +1,10 @@
 use crate::Result;
 use crate::SearchEngine;
-use async_trait::async_trait;
 use reqwest_scraper::FromXPath;
 use reqwest_scraper::ScraperResponse;
 
 pub struct Bing;
 
-#[async_trait]
 impl SearchEngine for Bing {
     async fn search(&self, keyword: &str) -> Result<Vec<crate::SearchItem>> {
         let html = reqwest::get(format!("https://www.bing.com/search?q={keyword}"))
